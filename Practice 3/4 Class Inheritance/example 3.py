@@ -12,7 +12,7 @@ class Student(Person):
     def display(self):
         print(f"Student: {self.name}, GPA: {self.GPA}")
 
-n, g = "Di", 4,1
+n, g = "Di", 4.1
 s = Student(n, g)
 s.display()
 
