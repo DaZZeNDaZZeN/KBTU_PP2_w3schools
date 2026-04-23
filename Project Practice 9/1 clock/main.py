@@ -51,8 +51,8 @@ while running:
     
     # rotating hands
     c_w , c_h = cursor.get_size()
-    blit_rotate_around_pivot(screen,cursor, (500, 500), (c_w/2, c_h), angle_seconds)
-    blit_rotate_around_pivot(screen,cursor_f, (500, 500), (c_w/2, c_h), angle_minutes)
+    blit_rotate_around_pivot(screen, cursor, (500, 500), (c_w/2, c_h), angle_seconds)
+    blit_rotate_around_pivot(screen, cursor_f, (500, 500), (c_w/2, c_h), angle_minutes)
     screen.blit(mickey, (500 - mickey.get_height() // 2, 500 - mickey.get_width() // 2))
 
     # quit on escape button press
