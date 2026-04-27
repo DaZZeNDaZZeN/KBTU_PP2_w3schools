@@ -114,7 +114,10 @@ class GameScene(SceneBase):
             pos = pygame.Rect(random.randint(0, (WIDTH//CELL)-1)*CELL, 
                               random.randint(0, (HEIGHT//CELL)-1)*CELL, CELL, CELL)
             if pos.collidelist(self.snake) == -1 and pos.collidelist(self.obstacles) == -1:
-                return {"pos": pos, "type": type, "spawn_time": pygame.time.get_ticks()}
+                weight = 1
+                if type == "normal":
+                    weight = random.choices([1, 3], weights=[80, 20])[0]
+                return {"pos": pos, "type": type, "weight": weight, "spawn_time": pygame.time.get_ticks()}
 
     def update_level(self):
         if self.score >= self.level * 5:
@@ -199,7 +202,7 @@ class GameScene(SceneBase):
         if new_head.colliderect(self.food["pos"]):
             if self.settings.get("sound_on") and self.snd_food:
                 self.snd_food.play()
-            self.score += 1
+            self.score += self.food["weight"]
             self.food = self.spawn_item("normal")
             self.update_level()
         elif new_head.colliderect(self.poison["pos"]):
@@ -216,7 +219,8 @@ class GameScene(SceneBase):
     def Render(self, screen):
         screen.fill(COLOR_BLACK)
         for seg in self.snake: pygame.draw.rect(screen, self.settings["snake_color"], seg)
-        pygame.draw.rect(screen, COLOR_GOLD, self.food["pos"])
+        food_color = COLOR_GOLD if self.food["weight"] == 1 else (0, 255, 255) # Cyan for high value
+        pygame.draw.rect(screen, food_color, self.food["pos"])
         pygame.draw.rect(screen, COLOR_POISON, self.poison["pos"])
         for obs in self.obstacles: pygame.draw.rect(screen, (100, 100, 100), obs)
         if self.powerup: pygame.draw.circle(screen, COLOR_BLUE, self.powerup["pos"].center, CELL//2)
