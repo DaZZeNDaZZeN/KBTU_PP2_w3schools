@@ -1,7 +1,6 @@
 import psycopg2
 from datetime import datetime
 
-# Database connection parameters - Update these to match your local setup
 DB_PARAMS = {
     "dbname": "snake_game",
     "user": "dazzenlaptop",

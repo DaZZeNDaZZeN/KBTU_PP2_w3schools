@@ -327,7 +327,7 @@ class GameOverScene(SceneBase):
         screen.blit(retry_hint, (WIDTH//2 - 80, 380))
         screen.blit(menu_hint, (WIDTH//2 - 110, 420))
 
-# run loop
+# main loop
 def run_game(width, height, fps, starting_scene):
     pygame.init()
     screen = pygame.display.set_mode((width, height))
