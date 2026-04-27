@@ -150,7 +150,7 @@ class GameScene(SceneBase):
     def Update(self):
         now = pygame.time.get_ticks()
 
-        if self.powerup is None and random.random() < 0.05: # ~1% chance per frame
+        if self.powerup is None and not self.shield_active and random.random() < 0.05: # ~1% chance per frame
             self.spawn_powerup()
         
         # check if power-up disappeared
